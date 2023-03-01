@@ -1,0 +1,29 @@
+﻿var act1flag;
+var act2flag;
+var act4flag;
+var act5flag;
+var con1flag;
+var con2flag;
+var con4flag;
+var con5flag;
+var iter1=0;
+var iter2=0;
+var iter4=0;
+var iter5=0;
+#define N 2;
+Root = ([con4flag==0]Con4_f -> Root) 
+       []
+       ([con4flag==1]Con4_s -> (([con5flag==0]Con5_f -> Root) 
+                                []
+                                ([con5flag==1]Con5_s -> ((unknown -> Root)))));
+
+P = 
+(set_con1flag_1{con1flag=1} -> Skip [] set_con1flag_0{con1flag=0} -> Skip);
+(set_con2flag_1{con2flag=1} -> Skip [] set_con2flag_0{con2flag=0} -> Skip);
+(set_con4flag_1{con4flag=1} -> Skip [] set_con4flag_0{con4flag=0} -> Skip);
+(set_con5flag_1{con5flag=1} -> Skip [] set_con5flag_0{con5flag=0} -> Skip);
+Root;
+
+
+//Specification:
+#assert P |= G ! unknown;
